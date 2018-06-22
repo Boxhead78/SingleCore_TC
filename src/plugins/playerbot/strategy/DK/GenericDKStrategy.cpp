@@ -183,8 +183,8 @@ void GenericDKStrategy::InitTriggers(std::list<TriggerNode*> &triggers)
 	triggers.push_back(new TriggerNode(
 		"enemy out of melee",
 		NextAction::array(0, new NextAction("icy touch", ACTION_NORMAL + 9),
-			new NextAction("death grip", ACTION_NORMAL + 9),
-			new NextAction("reach melee", ACTION_NORMAL + 8), NULL)));
+			new NextAction("death grip", ACTION_MOVE + 9),
+			new NextAction("reach melee", ACTION_MOVE + 8), NULL)));
 
 	triggers.push_back(new TriggerNode(
 		"low health",

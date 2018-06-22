@@ -124,7 +124,7 @@ uint32 RandomPlayerbotMgr::AddRandomBots()
 				if (bots.size() >= maxAllowedBotCount) break;
 			}
 		} while (result->NextRow());
-		//delete result;
+		    //delete result;
 	}
 
 	return guids.size();
@@ -176,24 +176,29 @@ bool RandomPlayerbotMgr::ProcessBot(uint32 bot)
     {
         if (!GetEventValue(bot, "dead"))
         {
+            //sLog->outMessage("playerbot", LOG_LEVEL_DEBUG, "Setting dead flag for bot %d", bot);
             sLog->outMessage("playerbot", LOG_LEVEL_DEBUG, "Setting dead flag for bot %d", bot);
             uint32 randomTime = urand(sPlayerbotAIConfig.minRandomBotReviveTime, sPlayerbotAIConfig.maxRandomBotReviveTime);
             SetEventValue(bot, "dead", 1, sPlayerbotAIConfig.maxRandomBotReviveTime + 5);
             SetEventValue(bot, "revive", 1, randomTime);
-			player->RemoveGhoul();
-			player->RemovePet(NULL, PET_SAVE_NOT_IN_SLOT, true);
-			player->BuildPlayerRepop();
-			player->SpawnCorpseBones();
-			player->RepopAtGraveyard();
+            player->RemoveGhoul();
+            player->RemovePet(NULL, PET_SAVE_NOT_IN_SLOT, true);
+            player->BuildPlayerRepop();
+            player->SpawnCorpseBones();
+            player->RepopAtGraveyard();
         }
 
-        //Boxhead - They pop back at nearest graveyard for now
         if (!GetEventValue(bot, "revive"))
         {
             sLog->outMessage("playerbot", LOG_LEVEL_DEBUG, "Revive dead bot %d", bot);
             SetEventValue(bot, "dead", 0, 0);
             SetEventValue(bot, "revive", 0, 0);
-			player->ResurrectPlayer(0.75f);
+           /* WorldLocation corpseLocation = player->GetCorpseLocation();
+            float x = corpseLocation.GetPositionX();
+            float y = corpseLocation.GetPositionY();
+            float z = corpseLocation.GetPositionZ();
+            player->TeleportTo(player->GetMapId(), x, y, z, 0);*/
+            player->ResurrectPlayer(0.75f);
         }
         return false;
     }
@@ -206,7 +211,7 @@ bool RandomPlayerbotMgr::ProcessBot(uint32 bot)
 		{
 			// Special handle for battleground maps
 			sLog->outMessage("playerbot", LOG_LEVEL_INFO, "bot %s died in a battleground. Try to resurrect.", player->GetName().c_str());
-			//SetEventValue(bot, "dead", 1, 5);
+			//SetEventValue(bot, "dead", 1, 5); Boxhead - Not needed here afaik
 			//this is spirit release confirm?
 			player->RemoveGhoul();
 			player->RemovePet(NULL, PET_SAVE_NOT_IN_SLOT, true);
@@ -242,8 +247,8 @@ bool RandomPlayerbotMgr::ProcessBot(uint32 bot)
 bool RandomPlayerbotMgr::ProcessBot(Player* player)
 {
 	player->GetPlayerbotAI()->GetAiObjectContext()->GetValue<bool>("random bot update")->Set(false);
-
     uint32 bot = player->GetGUID();
+
     if (player->GetGuild() && player->GetGuild()->GetLeaderGUID() == player->GetGUID())
     {
         for (vector<Player*>::iterator i = players.begin(); i != players.end(); ++i)
@@ -264,7 +269,7 @@ bool RandomPlayerbotMgr::ProcessBot(Player* player)
 		if (takePlayerLevel)
 		{
 			level = GetMasterLevel();
-            if (level == 0)
+			if (level == 0)
 			{
 				level = urand(minLevel, maxLevel);
 			}
@@ -517,14 +522,15 @@ void RandomPlayerbotMgr::RandomizeFirst(Player* bot)
             level += leveldiff;
 
         if (level <= 0)
-		{
-			level = urand(minLevel, maxLevel);
-		}
-		minLevel = level - level % 10;
-		maxLevel = level - (level % 10) + 9;
+        {
+            level = urand(minLevel, maxLevel);
+        }
+        minLevel = level - level % 10;
+        maxLevel = level - (level % 10) + 9;
 	}
 	for (int attempt = 0; attempt < 10; ++attempt)
-	{  
+	{
+
 		vector<GameTele const*> locs;
 		int index = urand(0, sPlayerbotAIConfig.randomBotMaps.size() - 1);
 
@@ -540,6 +546,7 @@ void RandomPlayerbotMgr::RandomizeFirst(Player* bot)
 
         index = urand(0, locs.size() - 1);
         GameTele const* tele = locs[index];
+
 		//caching.. if not, it will create excessive database load
         if (!takePlayerLevel) {
             int randomlevel = 0;

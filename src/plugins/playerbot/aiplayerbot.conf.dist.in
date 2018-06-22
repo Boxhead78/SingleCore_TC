@@ -134,7 +134,7 @@ AiPlayerbot.SightDistance = 50.0
 AiPlayerbot.SpellDistance = 25.0
 AiPlayerbot.ShootDistance = 11.0
 AiPlayerbot.ReactDistance = 150.0
-AiPlayerbot.GrindDistance = 100.0
+AiPlayerbot.GrindDistance = 450.0
 AiPlayerbot.LootDistance = 15.0
 AiPlayerbot.FleeDistance = 5.0
 AiPlayerbot.TooCloseDistance = 5.0
@@ -207,8 +207,8 @@ AiPlayerbot.MinRandomBotsPerInterval = 50
 AiPlayerbot.MaxRandomBotsPerInterval = 100
 AiPlayerbot.MinRandomBotsPriceChangeInterval = 7200
 AiPlayerbot.MaxRandomBotsPriceChangeInterval = 172800
-AiPlayerbot.MinRandomBotReviveTime = 60
-AiPlayerbot.MaxRandomReviveTime = 300
+AiPlayerbot.MinRandomBotReviveTime = 20
+AiPlayerbot.MaxRandomReviveTime = 60
 
 # Log on all random bots on start
 AiPlayerbot.RandomBotLoginAtStartup = 1

@@ -23,13 +23,13 @@ namespace ai
 	    ACTION_IDLE = 0,
 	    ACTION_NORMAL = 10,
 	    ACTION_HIGH = 20,
-	    ACTION_MOVE = 30,
-	    ACTION_INTERRUPT = 40,
-	    ACTION_DISPEL = 50,
-	    ACTION_LIGHT_HEAL = 60,
-	    ACTION_MEDIUM_HEAL = 70,
-	    ACTION_CRITICAL_HEAL = 80,
-	    ACTION_EMERGENCY = 90
+	    ACTION_INTERRUPT = 30,
+	    ACTION_DISPEL = 40,
+	    ACTION_LIGHT_HEAL = 50,
+	    ACTION_MEDIUM_HEAL = 60,
+	    ACTION_CRITICAL_HEAL = 70,
+	    ACTION_EMERGENCY = 80,
+		ACTION_MOVE = 1000//Always highest, makes sure bots stay in wanted combat range
 	};
 
     class Strategy : public PlayerbotAIAware

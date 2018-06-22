@@ -7,11 +7,11 @@ using namespace lfg;
 
 bool LfgJoinAction::Execute(Event event)
 {
-	if (bot->InBattleground())
-		return false;
-
     if (!sPlayerbotAIConfig.randomBotJoinLfg)
         return false;
+
+	if (bot->InBattleground())
+		return false;
 
     if (bot->isDead())
         return false;
@@ -237,7 +237,11 @@ bool LfgTeleportAction::Execute(Event event)
     }
 
     bot->ClearUnitState(UNIT_STATE_ALL_STATE_SUPPORTED);
-    sLFGMgr->TeleportPlayer(bot, out);
+
+	for (int attempts = 0; attempts < 200; attempts++)
+	{
+        sLFGMgr->TeleportPlayer(bot, out);
+	}
 	return true;
 }
 
@@ -261,6 +265,11 @@ bool BGJoinAction::Execute(Event event)
 	if (bot->IsBeingTeleported())
 		return false;
 
+    Group* group = bot->GetGroup();
+    if (group && name == "lfg join") //stop the spam
+        return false;
+	
+
 	Map* map = bot->GetMap();
 	if (map && map->Instanceable())
 		return false;
@@ -272,7 +281,6 @@ int j = 0;
 
 bool BGJoinAction::JoinProposal()
 {
-	ai->GetAiObjectContext()->GetValue<uint32>("lfg proposal")->Set(1);
 
 	if (bot->isUsingLfg())
 	{
@@ -335,6 +343,9 @@ bool BGJoinAction::JoinProposal()
 			bgQueueTypeId, bgTypeId, bot->GetGUID().GetCounter(), bot->GetName().c_str());
 		return true;
 	}
+
+    ai->GetAiObjectContext()->GetValue<uint32>("lfg proposal")->Set(1);
+
 	return false;
 }
 

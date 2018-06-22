@@ -39,7 +39,20 @@ namespace ai
                 bot->GetPlayerbotAI()->SetMaster(inviter);
 
             ai->ResetStrategies();
-            ai->TellMaster("Hi!");
+            int RandomNumber;
+            RandomNumber = urand(1, 3);
+            if (RandomNumber == 1)
+            {
+                ai->TellMaster("Hi!");
+            }
+            else if (RandomNumber == 2)
+            {
+                ai->TellMaster("Hello!");
+            }
+            else
+            {
+                ai->TellMaster("Hey there!");
+            }
             return true;
         }
     };
