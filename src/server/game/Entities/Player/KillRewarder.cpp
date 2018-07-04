@@ -164,7 +164,8 @@ inline void KillRewarder::_RewardXP(Player* player, float rate)
         Map* map = player->GetMap();
 		if (sConfigMgr->GetBoolDefault("Solocraft.Enable", true) && map->Instanceable())
 		{
-            xp = xp / 5;
+            const uint32 xpred = sConfigMgr->GetIntDefault("Solocraft.XpReduction", 30);
+            xp = xp / 100 * xpred;
 		}
         //end Solocraft
 

@@ -4536,6 +4536,12 @@ Solocraft.Heroic = 10
 Solocraft.Raid25 = 25
 Solocraft.Raid40 = 10
 
+# Solocraft Xp Reduction
+# Default:     30 (Reduce XP by 70% in dungeons)
+#              80 (Reduce XP by 20% in dungeons)
+
+Solocraft.XpReduction = 30
+
 #
 ###################################################################################################
 
