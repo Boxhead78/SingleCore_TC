@@ -4410,6 +4410,15 @@ KilledByCreature.Announcer = 1
 PvPKill.Announcer = 1
 
 #
+#     LFG.SoloMode
+#        Description: This module allow to use LFG with 1-4 players.
+#                     Possible useful in offline play or on low populated servers.
+#        Default:     0 (disabled)
+#                     1 (enabled)
+
+LFG.SoloMode = 1
+
+#
 ###################################################################################################
 
 ###################################################################################################
@@ -4531,6 +4540,32 @@ Solocraft.Raid40 = 10
 ###################################################################################################
 
 ###################################################################################################
+# IMMORTAL MODE #
+#################
+#
+#    ImmortalMode
+#        Description: Players cannot be killed by a mobs or in PVP, but can take damage
+#
+#        Value:       1 (Enable)
+#                     0 (Disable)
+
+ImmortalMode.PVE.Enable = 0
+ImmortalMode.PVP.Enable = 0
+
+#
+#    ImmortalMode.Zone
+#        Description: Players can't be killed in a certain zone.
+#
+#        Value:       0  (all zones)
+#                     1+ (specified zone)
+
+ImmortalMode.PVE.ZoneID = 0
+ImmortalMode.PVE.ZoneID = 0
+
+#
+###################################################################################################
+
+###################################################################################################
 # CONGRATS ON LEVEL-UP #
 ########################
 
@@ -4632,6 +4667,47 @@ Congrats.L110M = 0
 Congrats.L110S = 0
 Congrats.L1101 = 0
 Congrats.L1102 = 0
+
+#
+###################################################################################################
+
+###################################################################################################
+# MODIFIER ONLINE CHARACTERS
+#
+#    ModifierOnlineCharacters.Enable
+#        Set Modifier Online Characters status.
+#        Default: 1 - Enable
+#                 0 - Disable
+
+ModifierOnlineCharacters.Enable = 1
+
+#    ModifierOnlineCharacters.MinTimer
+#        Set min interval between sending characters
+#        Default: 60 (1 hours)
+
+ModifierOnlineCharacters.MinTimer = 60
+
+#    ModifierOnlineCharacters.MaxTimer
+#        Set min interval between sending characters
+#        Default: 180 (3 hours)
+
+ModifierOnlineCharacters.MaxTimer = 180
+
+#    ModifierOnlineCharacters.MinMoney
+#        Set the min amount of money to add to the online players.(coper)
+#        Will be sent with the calculation: (ModifierOnlineCharacters.MinMoney * Character Level) / 10
+#
+#        Default: 100
+
+ModifierOnlineCharacters.MinMoney = 100
+
+#    ModifierOnlineCharacters.MaxMoney
+#        Set the max amount of money to add to the online players.(coper)
+#        Will be sent with the calculation: (ModifierOnlineCharacters.MaxMoney * Character Level) / 10
+#
+#        Default: 200
+
+ModifierOnlineCharacters.MaxMoney = 200
 
 #
 ###################################################################################################

@@ -779,6 +779,8 @@ enum RBACPermissions
     RBAC_PERM_COMMAND_SERVER_DEBUG                           = 872,
     RBAC_PERM_COMMAND_WORLD_CHAT                             = 1015,
     RBAC_PERM_COMMAND_COMPLETE_QUEST_COMMAND                 = 1016,
+    RBAC_PERM_COMMAND_START_LEGION_COMMAND                   = 1017,
+    RBAC_PERM_COMMAND_PLAYER_BUFF_COMMAND                    = 1018,
     //
     // IF YOU ADD NEW PERMISSIONS, ADD THEM IN 3.3.5 BRANCH AS WELL!
     //
@@ -791,6 +793,7 @@ enum RBACPermissions
     RBAC_PERM_COMMAND_BLACKMARKET                            = 2004,
     RBAC_PERM_COMMAND_BLACKMARKET_SET_DURATION               = 2005,
     RBAC_PERM_COMMAND_NPC_RELOAD                             = 2006,
+    RBAC_PERM_COMMAND_LFG_DEBUG                              = 2007,
     RBAC_PERM_MAX
 };
 
