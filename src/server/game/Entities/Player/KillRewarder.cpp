@@ -17,12 +17,14 @@
 
 #include "KillRewarder.h"
 #include "Creature.h"
+#include "Config.h"
 #include "DB2Stores.h"
 #include "Formulas.h"
 #include "Group.h"
 #include "Guild.h"
 #include "GuildMgr.h"
 #include "InstanceScript.h"
+#include "Map.h"
 #include "Pet.h"
 #include "Player.h"
 #include "Scenario.h"
@@ -157,6 +159,14 @@ inline void KillRewarder::_RewardXP(Player* player, float rate)
         // 4.2.2. Apply auras modifying rewarded XP (SPELL_AURA_MOD_XP_PCT and SPELL_AURA_MOD_XP_FROM_CREATURE_TYPE).
         xp *= player->GetTotalAuraMultiplier(SPELL_AURA_MOD_XP_PCT);
         xp *= player->GetTotalAuraMultiplierByMiscValue(SPELL_AURA_MOD_XP_FROM_CREATURE_TYPE, int32(_victim->GetCreatureType()));
+
+		//Solocraft 4.2.2.1. Apply Solocraft XP reduction
+        Map* map = player->GetMap();
+		if (sConfigMgr->GetBoolDefault("Solocraft.Enable", true) && map->Instanceable())
+		{
+            xp = xp / 5;
+		}
+        //end Solocraft
 
         // 4.2.3. Give XP to player.
         player->GiveXP(xp, _victim, _groupRate);
